@@ -6,6 +6,7 @@ export interface Article {
     text_pt: string;
     text_en: string;
     tags: string[];
+    published:boolean;
     updated_at: string;
 }
 
