@@ -1,9 +1,7 @@
 <script lang="ts">
-    // Import markdown conversion library
     import { marked } from 'marked'
     import HeaderAdmin from "../HeaderAdmin.svelte";
 
-    // Declare a variable to store the markdown data
     let markdown = ""
     let review = false
     let articleTitle = ""
@@ -26,19 +24,23 @@
             <div class="edit-container">
                 <div class="edit-article">
                     <div class="edit-main-infos">
-                        <input placeholder="Article title here..." required bind:value={articleTitle} type="text" class="input-form">
-                        <input placeholder="Article description here..." bind:value={articleDesc} required type="text" class="input-form">
+                        <input placeholder="Article title here..." required bind:value={articleTitle} type="text" class="input-form title-form">
+                        <input placeholder="Article description here..." bind:value={articleDesc} required type="text" class="input-form desc-form">
                     </div>
                     <textarea bind:value={markdown} class="article-text-area" placeholder="Write your article here." required></textarea>
                 </div>
             </div>
         {:else}
             <div class="preview-visu">
-                <h1>{articleTitle}</h1>
-                <h2>{articleDesc}</h2>
+                <h1 class="title-art">{articleTitle}</h1>
+                <h2 class="desc-art">{articleDesc}</h2>
                 <div class="preview-container">{@html marked(markdown)}</div>
             </div>
         {/if}
+        <div class="btns-container">
+            <button class="btn-save-art save">Save draft</button>
+            <button class="btn-save-art publish">Publish</button>
+        </div>
     </div>
     </div>
 </body>
@@ -48,6 +50,7 @@
     .main-container {
         display: flex;
         flex-direction: column;
+        margin: 5% auto auto auto;
     }
 
     .writing-article-container {
@@ -60,30 +63,37 @@
     .changing-visu {
         display: flex;
         flex-direction: row;
-        margin: auto;
         width: 10%;
-        justify-content: left;
     }
 
+
     .button-change {
-        color: white;
-        border-radius: 3px;
-        padding: 10px;
         width: 80%;
-        background-color: #838383;
+        background-color: transparent;
+        border: none;
+        font-size: 25px;
+        color: white;
     }
 
     .edit-container {
         display: flex;
-        background-color: #bdbdbd;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0 10px 20px rgb(0,0,0, .5);
     }
 
     .edit-article {
         display: flex;
         flex-direction: column;
-        width: 80%;
+        width: 90%;
         margin: auto;
-        background-color: #bdbdbd;
+    }
+
+    .edit-main-infos {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 3% auto auto auto;
     }
 
     .input-form {
@@ -93,8 +103,32 @@
         font-size: 25px;
     }
 
-    .preview-container, .article-text-area {
+    .input-form:focus {
+        outline: none;
+    }
+
+    .title-form, .title-art {
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .desc-form, .desc-art {
+        font-size: 35px;
+    }
+
+    .article-text-area {
         width: 100%;
+        margin: 5% auto auto auto;
+        height: 60vh;
+        background-color: white;
+        border: none;
+        padding: 0;
+        font-family: "Fira Code", sans-serif;
+        font-size: 25px;
+    }
+
+    .preview-container {
+        width: 95%;
         margin: 5% auto auto auto;
         height: 80vh;
         background-color: white;
@@ -104,10 +138,60 @@
         font-size: 25px;
     }
 
+    .article-text-area:focus {
+        outline: none;
+    }
+
     .preview-visu {
         display: flex;
         flex-direction: column;
-        text-align: center;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0 10px 20px rgb(0,0,0, .5);
+    }
+
+    .preview-visu h1, h2, .preview-container {
+        margin: 3% auto auto 5%;
+    }
+
+
+    .btns-container {
+        display: flex;
+        flex-direction: row;
+        width: 30%;
+    }
+
+    .btn-save-art {
+        border-radius: 8px;
+        padding: 20px;
+        font-size: 15px;
+        margin: 3% 3% 5% 0;
+    }
+
+    .save {
+        background-color: #3333f5;
+        color: white;
+        font-weight: bold;
+        border: none;
+        transition: .3s ease;
+    }
+
+    .publish {
+        background-color: #dedddd;
+        color: black;
+        font-weight: bold;
+        border: none;
+        transition: .3s ease;
+    }
+
+    .save:hover {
+        transform: scale(1.1);
+        background-color: #1717f1;
+    }
+
+    .publish:hover {
+        transform: scale(1.1);
+        background-color: #818181;
     }
 
 
