@@ -1,8 +1,8 @@
 <script lang="ts">
-    import {getAllArticles} from "../../backend/requests.js";
     import {onMount} from "svelte";
     import type {Article, Articles} from "../../backend/interfaces.js";
     import {selectedArticle} from "../../stores/main.js"
+    import {getAllArticles} from "../../requests/get.js";
 
 
     let articles:Articles | null = null
