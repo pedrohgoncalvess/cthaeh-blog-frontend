@@ -1,6 +1,7 @@
 <script lang="ts">
     import { marked } from 'marked'
     import HeaderAdmin from "../HeaderAdmin.svelte";
+    import Tags from "svelte-tags-input";
 
     let markdown = ""
     let review = false
@@ -9,6 +10,10 @@
 
     function changeVisualization(state:boolean) {
         review = state
+    }
+
+    function sendNewArticle() {
+
     }
 
 </script>
@@ -26,6 +31,9 @@
                     <div class="edit-main-infos">
                         <input placeholder="Article title here..." required bind:value={articleTitle} type="text" class="input-form title-form">
                         <input placeholder="Article description here..." bind:value={articleDesc} required type="text" class="input-form desc-form">
+                        <div class="my-custom-class">
+                            <Tags/>
+                        </div>
                     </div>
                     <textarea bind:value={markdown} class="article-text-area" placeholder="Write your article here." required></textarea>
                 </div>
@@ -116,6 +124,11 @@
         font-size: 35px;
     }
 
+    .my-custom-class :global(.svelte-tags-input-tag.focus), .my-custom-class :global(.svelte-tags-input:focus) {
+        outline: none;
+        border: none;
+    }
+
     .article-text-area {
         width: 100%;
         margin: 5% auto auto auto;
@@ -125,6 +138,21 @@
         padding: 0;
         font-family: "Fira Code", sans-serif;
         font-size: 25px;
+    }
+
+
+    .my-custom-class :global(.svelte-tags-input:focus) {
+        outline: none;
+        border: none;
+    }
+    
+    .my-custom-class :global(.svelte-tags-input) {
+        color: red;
+        border-color: #1717f1;
+    }
+
+    .my-custom-class {
+        width: 40%;
     }
 
     .preview-container {
