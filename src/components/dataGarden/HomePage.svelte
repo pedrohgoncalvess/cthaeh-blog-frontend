@@ -1,6 +1,6 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import type {Article, Articles} from "../../backend/interfaces.js";
+    import type {Article, Articles} from "../../backend/interfaces/interfaces.js";
     import {selectedArticle} from "../../stores/main.js"
     import {getAllArticles} from "../../requests/get.js";
 
