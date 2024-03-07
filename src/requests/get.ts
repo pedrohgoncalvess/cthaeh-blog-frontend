@@ -1,10 +1,24 @@
-import type {Articles} from "../backend/interfaces.js";
+import type {Articles} from "../backend/interfaces/interfaces.js";
 import {apiHost} from "./main.js";
+import {getCookieValue} from "../backend/cookies.js";
 
-export async function getAllArticles():Promise<Articles> {
-    const request = await fetch(`${apiHost}/articles`,{
-        method: 'GET',
-    });
+export async function getAllArticles(authenticated:boolean=false):Promise<Articles> {
+
+    let request
+
+    console.log(getCookieValue("access"))
+
+    if (!authenticated) {
+        request = await fetch(`${apiHost}/articles`, {
+            method: 'GET',
+        });
+    } else {
+        request = await fetch(`${apiHost}/articles`, {
+            method: 'GET',
+            headers: {'Authorization':`Basic ${getCookieValue("auth")}`}
+        });
+    }
+
 
     if (request.status !== 200) {
         throw new Error('Erro ao obter os artigos');
