@@ -42,8 +42,11 @@
 	"type": "module",
 	"dependencies": {
 		"@auth/sveltekit": "^0.5.0",
+		"@mantine/core": "^7.5.2",
+		"@mantine/hooks": "^7.5.2",
 		"marked": "^11.1.1",
 		"svelte-meta-tags": "^3.1.0",
-		"svelte-routing": "^2.11.0"
+		"svelte-routing": "^2.11.0",
+		"svelte-tags-input": "^6.0.0"
 	}
 }
